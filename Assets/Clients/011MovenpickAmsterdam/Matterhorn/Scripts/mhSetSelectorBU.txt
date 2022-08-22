@@ -1,0 +1,140 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class MatterhornSetSelector : MonoBehaviour
+{
+    public Sprite[] mhPreview;
+    public GameObject[] mhDevider, mhLayout;
+    public GameObject[] mhScreen;
+    int currLayout = 0, currLayoutPreview = 1;                 //to prevent user go to layout 1 from layout 1
+
+
+    void Start()
+    {
+        SetMHLayout1();
+        UpdateScreen();
+        Debug.Log("start"+currLayout+" "+currLayoutPreview);
+    }
+
+    void Update()
+    {
+        //just for test
+        if (Input.GetKeyUp(KeyCode.Keypad1))
+        {
+            //prev
+            mhPreviousPreview();
+            
+        }
+        else if (Input.GetKeyUp(KeyCode.Keypad3))
+        {
+            //next
+            mhNextPreview();
+        }
+        else if (Input.GetKeyUp(KeyCode.Keypad0))
+        {
+            //apply
+            mhApplyPreview();
+        }
+    }
+
+    public void mhNextPreview()
+    {
+        if (currLayoutPreview < 3)
+        {
+            currLayoutPreview = currLayoutPreview + 1;
+            UpdateScreen();
+            Debug.Log("currpreview : " + currLayoutPreview);
+        }
+    }
+    public void mhPreviousPreview()
+    {
+        if (currLayoutPreview > 1)
+        {
+            currLayoutPreview = currLayoutPreview - 1;
+            UpdateScreen();
+            Debug.Log("currpreview : " + currLayoutPreview);
+        }
+    }
+    public void mhApplyPreview()
+    {
+        switch (currLayoutPreview)
+        {
+            case 1:
+                SetMHLayout1();
+                break;
+            case 2:
+                SetMHLayout2();
+                break;
+            case 3:
+                SetMHLayout3();
+                break;
+        }
+    }
+
+    public void UpdateScreen()
+    {
+        //mhScreen[1].GetComponent<Image>().sprite = mhPreview[currLayoutPreview-1];
+        for (int i = 0; i < mhScreen.Length; i++)
+        {
+            mhScreen[i].GetComponent<Image>().sprite = mhPreview[currLayoutPreview - 1];
+        }
+    }
+
+    public void SetMHLayout1()
+    {
+        if(currLayoutPreview != currLayout)
+        {
+            currLayout = 1;
+            mhLayout[0].SetActive(true);
+            for (int i = 0; i < mhDevider.Length; i++)
+            {
+                mhDevider[i].SetActive(true);
+                mhLayout[i + 1].SetActive(false);
+                Debug.Log("set 1 active");
+            }
+        }
+        else
+        {
+            Debug.Log("You currently here");
+        }
+    }
+
+    public void SetMHLayout2()
+    {
+        if (currLayoutPreview != currLayout)
+        {
+            currLayout = 2;
+            for (int i = 0; i < mhLayout.Length; i++)
+            {
+                mhLayout[i].SetActive(false);
+            }
+            mhLayout[1].SetActive(true);
+            mhDevider[0].SetActive(false);
+            mhDevider[1].SetActive(true);
+        }
+        else
+        {
+            Debug.Log("You currently here");
+        }
+    }
+
+    public void SetMHLayout3()
+    {
+        if (currLayoutPreview != currLayout)
+        {
+            currLayout = 3;
+            mhLayout[2].SetActive(true);
+            for (int i = 0; i < mhDevider.Length; i++)
+            {
+                mhDevider[i].SetActive(false);
+                mhLayout[i].SetActive(false);
+            }
+        }
+        else
+        {
+            Debug.Log("You currently here");
+        }
+    }
+}
