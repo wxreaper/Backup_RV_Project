@@ -1,0 +1,12 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Clients/003AtlantisThePalmDubai/Lobby/Scenes/Lobby.unity
+    guid: d1c3109bdb54ad54c8a2b2838528e640
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 8e2f8ce23b8168d47b805523ecc0c53c, type: 2}
